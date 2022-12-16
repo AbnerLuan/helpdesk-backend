@@ -5,10 +5,10 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
-import com.abner.helpdesk.domain.OrdemServico;
+import com.abner.helpdesk.domain.Chamado;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class OrdemServicoDTO implements Serializable {
+public class ChamadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -24,18 +24,18 @@ public class OrdemServicoDTO implements Serializable {
 	private String titulo;
 	@NotNull(message = "O campo OBSERVAÇÕES é requerido.")
 	private String observacoes;
-	@NotNull(message = "O campo FUNCIONARIO é requerido.")
-	private Integer funcionario;
+	@NotNull(message = "O campo TECNICO é requerido.")
+	private Integer tecnico;
 	@NotNull(message = "O campo CLIENTE é requerido.")
 	private Integer cliente;
-	private String nomeFuncionario;
+	private String nomeTecnico;
 	private String nomeCliente;
 
-	public OrdemServicoDTO() {
+	public ChamadoDTO() {
 		super();
 	}
 
-	public OrdemServicoDTO(OrdemServico obj) {
+	public ChamadoDTO(Chamado obj) {
 		super();
 		this.id = obj.getId();
 		this.dataAbertura = obj.getDataAbertura();
@@ -44,10 +44,10 @@ public class OrdemServicoDTO implements Serializable {
 		this.status = obj.getStatus().getCodigo();
 		this.titulo = obj.getTitulo();
 		this.observacoes = obj.getObservacoes();
-		this.funcionario = obj.getFuncionario().getId();
+		this.tecnico = obj.getTecnico().getId();
 		this.cliente = obj.getCliente().getId();
-		this.nomeFuncionario = obj.getCliente().getNome();
-		this.nomeCliente = obj.getFuncionario().getNome();
+		this.nomeTecnico = obj.getTecnico().getNome();
+		this.nomeCliente = obj.getCliente().getNome();
 	}
 
 	public Integer getId() {
@@ -106,12 +106,12 @@ public class OrdemServicoDTO implements Serializable {
 		this.observacoes = observacoes;
 	}
 
-	public Integer getFuncionario() {
-		return funcionario;
+	public Integer getTecnico() {
+		return tecnico;
 	}
 
-	public void setFuncionario(Integer funcionario) {
-		this.funcionario = funcionario;
+	public void setTecnico(Integer tecnico) {
+		this.tecnico = tecnico;
 	}
 
 	public Integer getCliente() {
@@ -122,12 +122,12 @@ public class OrdemServicoDTO implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public String getNomeFuncionario() {
-		return nomeFuncionario;
+	public String getNomeTecnico() {
+		return nomeTecnico;
 	}
 
-	public void setNomeFuncionario(String nomeFuncionario) {
-		this.nomeFuncionario = nomeFuncionario;
+	public void setNomeTecnico(String nomeTecnico) {
+		this.nomeTecnico = nomeTecnico;
 	}
 
 	public String getNomeCliente() {

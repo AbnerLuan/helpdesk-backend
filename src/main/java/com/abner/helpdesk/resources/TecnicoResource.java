@@ -19,49 +19,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.abner.helpdesk.domain.Funcionario;
-import com.abner.helpdesk.domain.dtos.FuncionarioDTO;
-import com.abner.helpdesk.services.FuncionarioService;
+import com.abner.helpdesk.domain.Tecnico;
+import com.abner.helpdesk.domain.dtos.TecnicoDTO;
+import com.abner.helpdesk.services.TecnicoService;
 
 @RestController
-@RequestMapping(value = "/funcionario")
-public class FuncionarioResource {
+@RequestMapping(value = "/tecnicos")
+public class TecnicoResource {
 
 	@Autowired
-	private FuncionarioService service;
+	private TecnicoService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<FuncionarioDTO> findById(@PathVariable Integer id) {
-		Funcionario obj = service.findById(id);
-		return ResponseEntity.ok().body(new FuncionarioDTO(obj));
+	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
+		Tecnico obj = service.findById(id);
+		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 
 	}
 
 	@GetMapping
-	public ResponseEntity<List<FuncionarioDTO>> findAll() {
-		List<Funcionario> list = service.findAll();
-		List<FuncionarioDTO> listDTO = list.stream().map(obj -> new FuncionarioDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<TecnicoDTO>> findAll() {
+		List<Tecnico> list = service.findAll();
+		List<TecnicoDTO> listDTO = list.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
-	public ResponseEntity<FuncionarioDTO> create(@Valid @RequestBody FuncionarioDTO objDTO) {
-		Funcionario newObj = service.create(objDTO);
+	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objDTO) {
+		Tecnico newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<FuncionarioDTO> update(@PathVariable Integer id, @Valid @RequestBody FuncionarioDTO objDTO) {
-		Funcionario obj = service.update(id, objDTO);
-		return ResponseEntity.ok().body(new FuncionarioDTO(obj));
+	public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDTO objDTO) {
+		Tecnico obj = service.update(id, objDTO);
+		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<FuncionarioDTO> delete(@PathVariable Integer id) {
+	public ResponseEntity<TecnicoDTO> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 

@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
-import com.abner.helpdesk.domain.Funcionario;
+import com.abner.helpdesk.domain.Tecnico;
 import com.abner.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class FuncionarioDTO implements Serializable {
+public class TecnicoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,26 +25,22 @@ public class FuncionarioDTO implements Serializable {
 	protected String email;
 	@NotNull(message = "O campo SENHA é requerido")
 	protected String senha;
-	@NotNull(message = "O campo TELEFONE é requerido")
-	protected String telefone;
 	protected Set<Integer> perfis = new HashSet<>();
-
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();
 
-	public FuncionarioDTO() {
+	public TecnicoDTO() {
 		super();
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public FuncionarioDTO(Funcionario obj) {
+	public TecnicoDTO(Tecnico obj) {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
-		this.telefone = obj.getTelefone();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
 		addPerfil(Perfil.CLIENTE);
@@ -88,14 +84,6 @@ public class FuncionarioDTO implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	public Set<Perfil> getPerfis() {

@@ -16,7 +16,7 @@ import com.abner.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class OrdemServico implements Serializable{
+public class Chamado implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -36,19 +36,19 @@ public class OrdemServico implements Serializable{
 	private String observacoes;
 
 	@ManyToOne
-	@JoinColumn(name = "funcionario_id")
-	private Funcionario funcionario;
+	@JoinColumn(name = "tecnico_id")
+	private Tecnico tecnico;
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
-	public OrdemServico() {
+	public Chamado() {
 		super();
 
 	}
 
-	public OrdemServico(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Funcionario funcionario,
+	public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico,
 			Cliente cliente) {
 		super();
 		this.id = id;
@@ -56,7 +56,7 @@ public class OrdemServico implements Serializable{
 		this.status = status;
 		this.titulo = titulo;
 		this.observacoes = observacoes;
-		this.funcionario = funcionario;
+		this.tecnico = tecnico;
 		this.cliente = cliente;
 	}
 
@@ -100,12 +100,12 @@ public class OrdemServico implements Serializable{
 		this.observacoes = observacoes;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public Tecnico getTecnico() {
+		return tecnico;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setTecnico(Tecnico tecnico) {
+		this.tecnico = tecnico;
 	}
 
 	public Cliente getCliente() {
@@ -145,7 +145,7 @@ public class OrdemServico implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrdemServico other = (OrdemServico) obj;
+		Chamado other = (Chamado) obj;
 		return Objects.equals(id, other.id);
 	}
 

@@ -26,8 +26,6 @@ public class ClienteDTO implements Serializable {
 	@NotNull(message = "O campo SENHA é requerido")
 	protected String senha;
 	@NotNull(message = "O campo TELEFONE é requerido")
-	protected String telefone;
-	protected String veiculo;
 	protected Set<Integer> perfis = new HashSet<>();
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -45,8 +43,6 @@ public class ClienteDTO implements Serializable {
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
-		this.telefone = obj.getTelefone();
-		this.veiculo = obj.getVeiculo();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
 		addPerfil(Perfil.CLIENTE);
@@ -90,22 +86,6 @@ public class ClienteDTO implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getVeiculo() {
-		return veiculo;
-	}
-
-	public void setVeiculo(String veiculo) {
-		this.veiculo = veiculo;
 	}
 
 	public Set<Perfil> getPerfis() {
